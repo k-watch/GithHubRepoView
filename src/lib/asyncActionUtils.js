@@ -1,3 +1,16 @@
+export const initDispatcher = (type) => {
+  const actionHandler = (dispatch) => {
+    dispatch({ type });
+
+    dispatch({
+      type,
+      data: null,
+    });
+  };
+
+  return actionHandler;
+};
+
 const createAsyncDispatcher = (type, callback) => {
   const SUCCESS = `${type}_SUCCESS`;
   const ERROR = `${type}_ERROR`;
@@ -7,7 +20,6 @@ const createAsyncDispatcher = (type, callback) => {
 
     try {
       const data = await callback(...rest);
-
       dispatch({
         type: SUCCESS,
         data,
@@ -46,6 +58,16 @@ const error = (error) => ({
   data: null,
   error,
 });
+
+export const initAsyncHandler = (type, key) => {
+  function handler(state, action) {
+    return {
+      ...state,
+      [key]: initAsyncState,
+    };
+  }
+  return handler;
+};
 
 export const createAsyncHandler = (type, key) => {
   const SUCCESS = `${type}_SUCCESS`;

@@ -31,7 +31,6 @@ const IssueContent = () => {
 
   return (
     <Wrap>
-      {loading && <div>로딩중</div>}
       {issue && (
         <div>
           <TitleWrap>
@@ -176,6 +175,6 @@ const BodyWrap = styled.div`
   }
 
   .content {
-    padding: 10px 20px 0px 20px;
+    padding: 15px 20px 0px 20px;
   }
 `;
