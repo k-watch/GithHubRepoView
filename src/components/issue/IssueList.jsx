@@ -50,7 +50,6 @@ const IssueList = () => {
               key={issue.id}
               style={{ cursor: 'pointer' }}
             >
-              {index + 1}
               <IssueItem issue={issue} />
             </li>
           ))}
@@ -71,16 +70,20 @@ const Wrap = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid black;
 
   ul {
-    width: 500px;
-    height: 300px;
+    width: 1200px;
+    height: 700px;
     overflow: auto;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
   }
 
   li {
-    border: 1px solid black;
-    margin-bottom: 20px;
+    border-bottom: 1px solid #bdbdbd;
+
+    :hover {
+      background-color: #d0d7de2b;
+    }
   }
 `;
