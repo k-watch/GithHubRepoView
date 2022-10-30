@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { TbCircleDot } from 'react-icons/tb';
 import { HiOutlineChatBubbleLeft } from 'react-icons/hi2';
 
-const today = new Date();
-
 const IssueItem = ({ issue }) => {
   const navigate = useNavigate();
 
@@ -19,7 +17,7 @@ const IssueItem = ({ issue }) => {
       </Title>
       <InfoWrap>
         <span>#{issue.number}</span>
-        <span>opend on {today.toDateString(issue.created_at)}</span>
+        <span>opend on {new Date(issue.created_at).toDateString()}</span>
         <span>by {issue.user.login}</span>
       </InfoWrap>
     </Wrap>
