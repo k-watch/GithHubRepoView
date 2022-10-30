@@ -1,10 +1,12 @@
-import React from 'react';
-import { BrowserRouter, Routes as ReactRoutes } from 'react-router-dom';
+import { BrowserRouter, Routes as ReactRoutes, Route } from 'react-router-dom';
+import IssueListPage from 'pages/IssueListPage';
 
 const Routes = () => {
   return (
     <BrowserRouter>
-      <ReactRoutes />
+      <ReactRoutes>
+        <Route path="/" element={<IssueListPage />} />
+      </ReactRoutes>
     </BrowserRouter>
   );
 };
