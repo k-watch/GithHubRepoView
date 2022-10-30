@@ -8,6 +8,7 @@ const options = {
 
 const useInfiniteScroll = (callback) => {
   const [observationTarget, setObservationTarget] = useState(null);
+  const [observerStop, setObserverStop] = useState(false);
   const observer = useRef();
 
   const getObserver = () => {
@@ -25,18 +26,19 @@ const useInfiniteScroll = (callback) => {
   useEffect(() => {
     const currentObserver = getObserver();
 
-    if (observationTarget) {
-      currentObserver.observe(observationTarget);
+    if (!observerStop) {
+      if (observationTarget) {
+        currentObserver.observe(observationTarget);
+      }
     }
-
     return () => {
       if (observationTarget) {
         currentObserver.unobserve(observationTarget);
       }
     };
-  }, [observationTarget]);
+  }, [observationTarget, observerStop]);
 
-  return setObservationTarget;
+  return [setObservationTarget, setObserverStop];
 };
 
 export default useInfiniteScroll;

@@ -176,6 +176,6 @@ const BodyWrap = styled.div`
   }
 
   .content {
-    padding: 0 20px;
+    padding: 10px 20px 0px 20px;
   }
 `;

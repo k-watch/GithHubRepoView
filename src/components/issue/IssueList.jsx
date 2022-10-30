@@ -14,8 +14,8 @@ const options = {
   threshold: 0.5,
 };
 
-let page = 1;
-let check = false;
+let page = 8;
+const check = false;
 
 const IssueList = () => {
   const state = useIssueState();
@@ -23,10 +23,14 @@ const IssueList = () => {
   const [list, setList] = useState([]);
   const { data: issueList, loading, error } = state.issueList;
 
+  const [target, setObserverStop] = useInfiniteScroll(() =>
+    getIssueList(dispatch, page)
+  );
+
   useEffect(() => {
     if (issueList) {
       if (issueList.length !== 25) {
-        check = true;
+        setObserverStop(true);
       }
       const strArr = Object.values(issueList);
 
@@ -34,11 +38,6 @@ const IssueList = () => {
       page += 1;
     }
   }, [issueList]);
-
-  // TODO:
-  // 더이상 불러올 데이터 없을 때
-  // callback 함수 호출 하지 않게 만들어야 함.
-  const target = useInfiniteScroll(() => getIssueList(dispatch, page));
 
   return (
     <Wrap>
