@@ -6,6 +6,7 @@ import {
 } from 'modules/context/IssueContext';
 import useInfiniteScroll from 'modules/hooks/useInfiniteScroll';
 import styled from 'styled-components';
+import IssueItem from './IssueItem';
 
 const options = {
   root: null,
@@ -17,7 +18,6 @@ let page = 1;
 let check = false;
 
 const IssueList = () => {
-  const [number, setNumber] = useState(null);
   const state = useIssueState();
   const dispatch = useIssueDispatch();
   const [list, setList] = useState([]);
@@ -48,19 +48,10 @@ const IssueList = () => {
             <li
               role="presentation"
               key={issue.id}
-              onClick={() => setNumber(issue.number)}
               style={{ cursor: 'pointer' }}
             >
               {index + 1}
-              <div>
-                <span>#{issue.number}</span> &nbsp;
-                <span>제목:{issue.title}</span>
-              </div>
-              <div>
-                <span>작성자:{issue.user.login}</span> &nbsp;
-                <span>작성일:{issue.created_at}</span> &nbsp;
-                <span>코멘트 수:{issue.comments}</span>
-              </div>
+              <IssueItem issue={issue} />
             </li>
           ))}
         <div ref={target} />

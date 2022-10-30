@@ -12,6 +12,6 @@ export const getIssueList = async (page) => {
 
 export const getIssue = async (number) => {
   const { data } = await axiosInstance.get(`/issues/${number}`);
-
+  console.log(data);
   return data;
 };
