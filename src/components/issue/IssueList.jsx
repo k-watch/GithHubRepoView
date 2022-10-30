@@ -51,7 +51,16 @@ const IssueList = () => {
               onClick={() => setNumber(issue.number)}
               style={{ cursor: 'pointer' }}
             >
-              {index + 1} {issue.login} ({issue.title})
+              {index + 1}
+              <div>
+                <span>#{issue.number}</span> &nbsp;
+                <span>제목:{issue.title}</span>
+              </div>
+              <div>
+                <span>작성자:{issue.user.login}</span> &nbsp;
+                <span>작성일:{issue.created_at}</span> &nbsp;
+                <span>코멘트 수:{issue.comments}</span>
+              </div>
             </li>
           ))}
         <div ref={target} />
