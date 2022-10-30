@@ -72,11 +72,16 @@ const Wrap = styled.div`
   transform: translate(-50%, -50%);
 
   ul {
-    width: 1200px;
+    max-width: 1200px;
+    min-width: 380px;
     height: 700px;
     overflow: auto;
     border: 1px solid #bdbdbd;
     border-radius: 8px;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   li {
