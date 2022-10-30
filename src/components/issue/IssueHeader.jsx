@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import {
   useIssueState,
@@ -9,6 +10,8 @@ import { TbCircleDot } from 'react-icons/tb';
 import styled from 'styled-components';
 
 const IssueHeader = () => {
+  const navigate = useNavigate();
+
   const state = useIssueState();
   const dispatch = useIssueDispatch();
 
@@ -17,6 +20,10 @@ const IssueHeader = () => {
   useEffect(() => {
     getIssueMain(dispatch);
   }, []);
+
+  const onClickMain = () => {
+    navigate('/');
+  };
 
   return (
     <div>
@@ -27,7 +34,7 @@ const IssueHeader = () => {
             {issue.owner.login} / <span>{issue.name}</span>
           </TitleWrap>
           <NavWrap>
-            <li>
+            <li key={issue.id} role="presentation" onClick={onClickMain}>
               <TbCircleDot />
               <span>Issues</span>
               <span className="issueCount">{issue.open_issues_count}</span>
@@ -71,6 +78,9 @@ const NavWrap = styled.nav`
   li {
     display: flex;
     align-items: center;
+
+    cursor: pointer;
+
     span {
       margin-left: 5px;
       font-size: 13px;

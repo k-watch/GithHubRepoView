@@ -8,13 +8,14 @@ const IssueItem = ({ issue }) => {
 
   return (
     <Wrap role="presentation" onClick={() => navigate(`/${issue.number}`)}>
-      <Title>
+      <TitleWrap>
         <TbCircleDot className="circleDot" />
         <h4>{issue.title}</h4>
-        <span>
-          <HiOutlineChatBubbleLeft /> {issue.comments}
-        </span>
-      </Title>
+        <div>
+          <HiOutlineChatBubbleLeft />
+          <span>{issue.comments}</span>
+        </div>
+      </TitleWrap>
       <InfoWrap>
         <span>#{issue.number}</span>
         <span>opend on {new Date(issue.created_at).toDateString()}</span>
@@ -30,7 +31,7 @@ const Wrap = styled.div`
   padding: 15px;
 `;
 
-const Title = styled.div`
+const TitleWrap = styled.div`
   display: flex;
   align-items: center;
 
@@ -41,17 +42,21 @@ const Title = styled.div`
   }
 
   h4 {
+    margin-bottom: 3px;
     font-weight: bold;
     font-size: 17px;
-    line-height: 0.2;
   }
 
-  span {
+  div {
     display: flex;
     align-items: center;
     margin-left: auto;
     font-weight: bold;
     font-size: 14px;
+
+    span {
+      margin-bottom: 3px;
+    }
 
     svg {
       margin-right: 5px;
