@@ -98,6 +98,7 @@ const Wrap = styled.div`
 `;
 
 const TitleWrap = styled.h1`
+  margin-bottom: 10px;
   font-size: 32px;
 
   .titleText {

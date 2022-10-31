@@ -57,9 +57,11 @@ const IssueList = () => {
           list.map((issue, index) => {
             if (index === 4) {
               return (
-                <li key={4} className="bannerItem">
-                  <img src={imgSrc} />
-                  <p>AI가 추천하는 합격 포지션</p>
+                <li key={imgSrc} className="bannerItem">
+                  <a href="https://www.wanted.co.kr/ ">
+                    <img src={imgSrc} />
+                    <p>AI가 추천하는 합격 포지션</p>
+                  </a>
                 </li>
               );
             }
