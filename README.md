@@ -33,7 +33,7 @@
 </br>
 
 ## ✏ 기술 스택 
- JAVASCRIPT, REACT, AXIOS, STYLED-COMPONENTS, React-Markdown, React-Icons
+ JavaScript, React, Axios, styled-components, React-Markdown, React-Icons
  
 ## 구현 방법
  - Context API 활용
