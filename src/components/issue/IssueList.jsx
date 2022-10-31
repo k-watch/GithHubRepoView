@@ -80,18 +80,13 @@ export default IssueList;
 const S = {
   Wrap: styled.div`
     ${flexBox()}
-    ${absoluteCenter()}
+    margin-top: 40px;
 
-  ul {
+    ul {
       width: 1200px;
-      height: 700px;
       overflow: auto;
       border: 1px solid ${({ theme }) => theme.deepGray};
       border-radius: 8px;
-
-      ::-webkit-scrollbar {
-        display: none;
-      }
 
       li {
         border-bottom: 1px solid ${({ theme }) => theme.deepGray};
