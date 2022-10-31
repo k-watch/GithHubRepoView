@@ -8,12 +8,12 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
   }
 
   li {
-  list-style: none;
+    list-style: none;
   }
   
   button{
