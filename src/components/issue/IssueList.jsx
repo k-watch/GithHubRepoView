@@ -1,5 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable jsx-a11y/alt-text */
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import {
   useIssueDispatch,
@@ -9,16 +7,10 @@ import {
 } from 'modules/context/IssueContext';
 import useInfiniteScroll from 'modules/hooks/useInfiniteScroll';
 import styled from 'styled-components';
+import { absoluteCenter, flexBox } from 'styles/mixin';
+import BannerItem from './common/BannerItem';
 import IssueItem from './IssueItem';
 
-const options = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.5,
-};
-
-const imgSrc =
-  'https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100';
 let page = 1;
 
 const IssueList = () => {
@@ -28,7 +20,7 @@ const IssueList = () => {
   const { data: issueList, loading, error } = state.issueList;
 
   const [target, setObserverStop] = useInfiniteScroll(() =>
-    getIssueList(dispatch, page)
+    getIssueList(dispatch, { sort: 'comments', per_page: 25, page })
   );
 
   useEffect(() => {
@@ -57,11 +49,8 @@ const IssueList = () => {
           list.map((issue, index) => {
             if (index === 4) {
               return (
-                <li key={imgSrc} className="bannerItem">
-                  <a href="https://www.wanted.co.kr/ ">
-                    <img src={imgSrc} />
-                    <p>AI가 추천하는 합격 포지션</p>
-                  </a>
+                <li key={indexedDB}>
+                  <BannerItem />
                 </li>
               );
             }
@@ -81,14 +70,9 @@ const IssueList = () => {
 export default IssueList;
 
 const Wrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  ${flexBox()}
+  ${absoluteCenter()}
+ 
 
   ul {
     width: 1200px;
@@ -99,12 +83,6 @@ const Wrap = styled.div`
 
     ::-webkit-scrollbar {
       display: none;
-    }
-
-    .bannerItem {
-      padding: 5px 0 15px 0;
-      font-weight: bold;
-      text-align: center;
     }
 
     li {

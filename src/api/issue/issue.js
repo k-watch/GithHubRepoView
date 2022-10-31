@@ -8,16 +8,15 @@ export const getIssueMain = async () => {
   return data;
 };
 
-export const getIssueList = async (page) => {
-  const { data } = await axiosInstance.get(
-    `/issues?sort=comments&per_page=${PER_PAGE}&page=${page}`
-  );
+export const getIssueList = async (params) => {
+  axiosInstance.defaults.params = params;
+  const { data } = await axiosInstance.get('/issues');
 
   return data;
 };
 
-export const getIssue = async (number) => {
-  const { data } = await axiosInstance.get(`/issues/${number}`);
+export const getIssue = async (issueNumber) => {
+  const { data } = await axiosInstance.get(`/issues/${issueNumber}`);
 
   return data;
 };
