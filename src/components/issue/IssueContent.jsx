@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react/no-children-prop */
 import { useParams } from 'react-router-dom';
 import {
   useIssueState,
@@ -7,13 +5,11 @@ import {
   getIssue,
 } from 'modules/context/IssueContext';
 import { useEffect } from 'react';
+import { TbCircleDot } from 'react-icons/tb';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import styled from 'styled-components';
-import { TbCircleDot } from 'react-icons/tb';
 import 'github-markdown-css';
+import styled from 'styled-components';
 
 const IssueContent = () => {
   const { issueNumber } = useParams();
@@ -30,14 +26,14 @@ const IssueContent = () => {
   }, [issueNumber]);
 
   return (
-    <Wrap>
+    <S.Wrap>
       {issue && (
         <div>
-          <TitleWrap>
+          <S.TitleWrap>
             <span className="titleText">{issue.title}</span>
             <span className="issueNumber">#{issue.number}</span>
-          </TitleWrap>
-          <SubTitleWrap>
+          </S.TitleWrap>
+          <S.SubTitleWrap>
             <span className="openCircle">
               <TbCircleDot />
               Open
@@ -46,9 +42,9 @@ const IssueContent = () => {
             <span>opend this issue on</span>
             <span>{new Date(issue.created_at).toDateString()}</span>
             <span>· {issue.comments} comments</span>
-          </SubTitleWrap>
-          <Line />
-          <BodyWrap>
+          </S.SubTitleWrap>
+          <S.Line />
+          <S.BodyWrap>
             <div className="title">
               <img
                 src={`${issue.user.avatar_url}&s=80`}
@@ -60,122 +56,105 @@ const IssueContent = () => {
             </div>
             <div className="content">
               <div className="markdown-body">
-                <ReactMarkdown
-                  className="Wrap"
-                  children={issue.body}
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    code({ node, inline, className, children, ...props }) {
-                      const match = /language-(\w+)/.exec(className || '');
-                      return !inline && match ? (
-                        <SyntaxHighlighter
-                          children={String(children).replace(/\n$/, '')}
-                          style={vs}
-                          language={match[1]}
-                          {...props}
-                        />
-                      ) : (
-                        <code className={className} {...props}>
-                          {children}
-                        </code>
-                      );
-                    },
-                  }}
-                />
+                <ReactMarkdown className="Wrap" remarkPlugins={[remarkGfm]}>
+                  {issue.body}
+                </ReactMarkdown>
               </div>
             </div>
-          </BodyWrap>
+          </S.BodyWrap>
         </div>
       )}
-    </Wrap>
+    </S.Wrap>
   );
 };
 
 export default IssueContent;
 
-const Wrap = styled.div`
-  padding: 50px;
-`;
+const S = {
+  Wrap: styled.div`
+    padding: 50px;
+  `,
 
-const TitleWrap = styled.h1`
-  margin-bottom: 10px;
-  font-size: 32px;
+  TitleWrap: styled.h1`
+    margin-bottom: 10px;
+    font-size: 32px;
 
-  .titleText {
-    margin-right: 10px;
-  }
-
-  .issueNumber {
-    font-weight: lighter;
-    color: ${({ theme }) => theme.gray};
-  }
-`;
-
-const SubTitleWrap = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-
-  span {
-    margin-right: 5px;
-    font-size: 14px;
-    color: ${({ theme }) => theme.gray};
-  }
-
-  .openCircle {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    border-radius: 40px;
-    background-color: ${({ theme }) => theme.green};
-    font-weight: bold;
-    color: white;
-    line-height: 0.1;
-
-    svg {
-      margin-right: 3px;
+    .titleText {
+      margin-right: 10px;
     }
-  }
 
-  .userName {
-    font-weight: bold;
-  }
-`;
-
-const Line = styled.div`
-  margin: 25px 0;
-  border-bottom: 1px solid ${({ theme }) => theme.deepGray};
-`;
-
-const BodyWrap = styled.div`
-  border: 1px solid ${({ theme }) => theme.deepGray};
-  border-radius: 8px;
-
-  .title {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    border-bottom: 1px solid ${({ theme }) => theme.deepGray};
-    background-color: ${({ theme }) => theme.lightGray};
-
-    img {
-      height: 35px;
-      margin-right: 8px;
-      border-radius: 40px;
-    }
-    span {
-      margin-right: 5px;
-      font-size: 15px;
+    .issueNumber {
+      font-weight: lighter;
       color: ${({ theme }) => theme.gray};
     }
+  `,
+
+  SubTitleWrap: styled.div`
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+    span {
+      margin-right: 5px;
+      font-size: 14px;
+      color: ${({ theme }) => theme.gray};
+    }
+
+    .openCircle {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      border-radius: 40px;
+      background-color: ${({ theme }) => theme.green};
+      font-weight: bold;
+      color: white;
+      line-height: 0.1;
+
+      svg {
+        margin-right: 3px;
+      }
+    }
+
     .userName {
       font-weight: bold;
     }
-  }
+  `,
 
-  .content {
-    padding: 15px 20px 0px 20px;
-  }
-`;
+  Line: styled.div`
+    margin: 25px 0;
+    border-bottom: 1px solid ${({ theme }) => theme.deepGray};
+  `,
+
+  BodyWrap: styled.div`
+    border: 1px solid ${({ theme }) => theme.deepGray};
+    border-radius: 8px;
+
+    .title {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      border-bottom: 1px solid ${({ theme }) => theme.deepGray};
+      background-color: ${({ theme }) => theme.lightGray};
+
+      img {
+        height: 35px;
+        margin-right: 8px;
+        border-radius: 40px;
+      }
+      span {
+        margin-right: 5px;
+        font-size: 15px;
+        color: ${({ theme }) => theme.gray};
+      }
+      .userName {
+        font-weight: bold;
+      }
+    }
+
+    .content {
+      padding: 15px 20px 0px 20px;
+    }
+  `,
+};

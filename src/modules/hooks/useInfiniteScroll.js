@@ -1,11 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
 
-const options = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.5,
-};
-
 const useInfiniteScroll = (callback) => {
   const [observationTarget, setObservationTarget] = useState(null);
   const [observerStop, setObserverStop] = useState(false);
@@ -13,11 +7,14 @@ const useInfiniteScroll = (callback) => {
 
   const getObserver = () => {
     if (!observer.current) {
-      observer.current = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          callback();
-        }
-      }, options);
+      observer.current = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            callback();
+          }
+        },
+        { threshold: 0.5 }
+      );
     }
 
     return observer.current;

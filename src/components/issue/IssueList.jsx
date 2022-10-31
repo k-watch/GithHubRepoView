@@ -43,7 +43,7 @@ const IssueList = () => {
   }, [issueList]);
 
   return (
-    <Wrap>
+    <S.Wrap>
       <ul>
         {list &&
           list.map((issue, index) => {
@@ -61,45 +61,47 @@ const IssueList = () => {
             );
           })}
         <div ref={target} />
-        {loading && <LodingWrap>로딩중...</LodingWrap>}
+        {loading && <S.LodingWrap>로딩중...</S.LodingWrap>}
       </ul>
-    </Wrap>
+    </S.Wrap>
   );
 };
 
 export default IssueList;
 
-const Wrap = styled.div`
-  ${flexBox()}
-  ${absoluteCenter()}
+const S = {
+  Wrap: styled.div`
+    ${flexBox()}
+    ${absoluteCenter()}
  
 
   ul {
-    width: 1200px;
-    height: 700px;
-    overflow: auto;
-    border: 1px solid ${({ theme }) => theme.deepGray};
-    border-radius: 8px;
+      width: 1200px;
+      height: 700px;
+      overflow: auto;
+      border: 1px solid ${({ theme }) => theme.deepGray};
+      border-radius: 8px;
 
-    ::-webkit-scrollbar {
-      display: none;
-    }
+      ::-webkit-scrollbar {
+        display: none;
+      }
 
-    li {
-      border-bottom: 1px solid ${({ theme }) => theme.deepGray};
+      li {
+        border-bottom: 1px solid ${({ theme }) => theme.deepGray};
 
-      cursor: pointer;
+        cursor: pointer;
 
-      :hover {
-        background-color: ${({ theme }) => theme.lightGray};
+        :hover {
+          background-color: ${({ theme }) => theme.lightGray};
+        }
       }
     }
-  }
-`;
+  `,
 
-const LodingWrap = styled.div`
-  padding: 20px 0;
-  font-weight: bold;
-  font-size: 30px;
-  text-align: center;
-`;
+  LodingWrap: styled.div`
+    padding: 20px 0;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+  `,
+};

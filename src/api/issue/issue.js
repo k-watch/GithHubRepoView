@@ -1,7 +1,5 @@
 import axiosInstance from 'api';
 
-const PER_PAGE = 25;
-
 export const getIssueMain = async () => {
   const { data } = await axiosInstance.get();
 
@@ -9,8 +7,7 @@ export const getIssueMain = async () => {
 };
 
 export const getIssueList = async (params) => {
-  axiosInstance.defaults.params = params;
-  const { data } = await axiosInstance.get('/issues');
+  const { data } = await axiosInstance.get('/issues', { params });
 
   return data;
 };
