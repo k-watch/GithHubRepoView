@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+# GitHub Repo View
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 특정 깃헙 레파지토리([angular-cli](https://github.com/angular/angular-cli))의 이슈 목록과 상세 내용을 확인
+>
+> ### 🌍 [배포링크](https://k-watch.netlify.app/)
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+## 📖 목차
 
-### `npm start`
+- [구현기능](#-구현-기능)
+- [폴더구조](#-폴더-구조)
+- [프로젝트 설치 및 실행](#-3.프로젝트-설치-및-실행)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+</br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 구현 기능
+- 공통
+  - Context API를 활용한 API 연동
+  - 데이터 요청 중 로딩 표시
+  - 에러 화면 구현
+- 공통 헤더
+  - Organization Name / Repository Name이 표시
+- 이슈 목록 화면
+  - open 상태의 이슈 중 코멘트가 많은 순으로 정렬
+  - 각 행에 이슈번호, 이슈제목, 작성자, 작성일
+  - 다섯번째 셀에 원티드 광고 출력
+  - 화면을 아래로 스크롤 할 시 이슈 목록 추가 로딩 (인피니티 스크롤)
+- 이슈 상세 화면
+  - 이슈의 상세 내용 표시
+  - 이슈번호, 이슈제목, 작성자, 작성일, 코멘트 수, 작성자 프로필 이미지, 본문 표시
 
-### `npm test`
+</br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ✏ 기술 스택 
+ JAVASCRIPT, REACT, AXIOS, STYLED-COMPONENTS, React-Markdown, React-Icons
+ 
+## 구현 방법
+ - Context API 활용
+ - 데이터 요청 중 로딩 표시
+ - 인피니티 스크롤
 
-### `npm run build`
+## 📚 폴더 구조
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```jsx
+📂 src
+├── 📂 api
+│   ├── 📂 common
+│   │   └── 📄 url // URL 상수 관리
+│   ├── 📂 issue
+│   │   └── 📄 issue 
+│   └── 📄 index
+├── 📂 component
+│   ├── 📂 common
+│   │   ├── 📄 BannerItem
+│   │   └── 📄 Loading
+│   ├── 📂 issue
+│   │   ├── 📄 IssueContent
+│   │   ├── 📄 IssueHeader
+│   │   ├── 📄 IssueItem
+│   │   └── 📄 IssueList
+├── 📂 modules
+│   ├── 📂 context
+│   │   └── 📄 IssueContext
+│   ├── 📂 hooks
+│   │   └── 📄 useInfiniteScroll // IntersectionObserver 이용한 무한 스크롤링
+│   └── 📄 asyncActionUtils asnyc // 초기화, 로딩, 성공, 실패 관리
+├── 📂 pages
+│   ├── 📄 IssueContentPage
+│   └── 📄 IssueListPage
+├── 📂 router
+│   └── 📄 Router
+├── 📂 styles
+│   ├── 📄 GlobalStyle
+│   ├── 📄 mixin
+│   └── 📄 theme
+├── 📄 App
+└── 📄 index
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 3. 프로젝트 설치 및 실행
+1. GitHub Rest API 횟수 제한을 해제하기 위해 개인 토큰 발급 뒤 root 경로에 .env 파일을 생성하고 아래 내용을 추가합니다.
+```command
+REACT_APP_ACCESS_TOKENS='발급받은 토큰'
+```
+2. cmd 창에 아래 command 입력해주세요.
+```command
+$ npm install
+$ npm start
+```
