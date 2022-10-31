@@ -8,37 +8,45 @@ import {
 import useInfiniteScroll from 'modules/hooks/useInfiniteScroll';
 import styled from 'styled-components';
 import { absoluteCenter, flexBox } from 'styles/mixin';
-import BannerItem from './common/BannerItem';
+import Loading from 'components/common/Loading';
+import BannerItem from '../common/BannerItem';
 import IssueItem from './IssueItem';
 
-let page = 1;
+const PER_PAGE = 25;
 
 const IssueList = () => {
+  const [list, setList] = useState([]);
+  const page = useRef(1);
+
   const state = useIssueState();
   const dispatch = useIssueDispatch();
-  const [list, setList] = useState([]);
+
   const { data: issueList, loading, error } = state.issueList;
 
   const [target, setObserverStop] = useInfiniteScroll(() =>
-    getIssueList(dispatch, { sort: 'comments', per_page: 25, page })
+    getIssueList(dispatch, {
+      sort: 'comments',
+      per_page: PER_PAGE,
+      page: page.current,
+    })
   );
 
   useEffect(() => {
     return () => {
-      page = 1;
       initIssueList(dispatch);
     };
   }, []);
 
   useEffect(() => {
     if (issueList) {
-      if (issueList.length !== 25) {
+      // 페이지당 개수와 받아온 데이터의 개수가
+      // 다르다면 마지막 페이지
+      if (issueList.length !== PER_PAGE) {
         setObserverStop(true);
       }
-      const strArr = Object.values(issueList);
 
-      setList([...list, ...strArr]);
-      page += 1;
+      setList([...list, ...issueList]);
+      page.current += 1;
     }
   }, [issueList]);
 
@@ -61,7 +69,7 @@ const IssueList = () => {
             );
           })}
         <div ref={target} />
-        {loading && <S.LodingWrap>로딩중...</S.LodingWrap>}
+        {loading && <Loading />}
       </ul>
     </S.Wrap>
   );
@@ -73,7 +81,6 @@ const S = {
   Wrap: styled.div`
     ${flexBox()}
     ${absoluteCenter()}
- 
 
   ul {
       width: 1200px;
@@ -96,12 +103,5 @@ const S = {
         }
       }
     }
-  `,
-
-  LodingWrap: styled.div`
-    padding: 20px 0;
-    font-weight: bold;
-    font-size: 30px;
-    text-align: center;
   `,
 };

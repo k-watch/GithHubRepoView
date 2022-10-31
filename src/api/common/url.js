@@ -1,4 +1,8 @@
 const URL = {
+  ISSUE: {
+    LIST_LINK: '/',
+    CONTENT_LINK: '/:issueNumber',
+  },
   WANTED: {
     LINK: 'https://www.wanted.co.kr/',
     IMG_SRC:

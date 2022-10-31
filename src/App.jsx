@@ -1,11 +1,10 @@
-import IssueHeader from 'components/issue/IssueHeader';
 import { IssueProvider } from 'modules/context/IssueContext';
-import Routes from 'router/Routes';
+import Router from 'router/Router';
 
 function App() {
   return (
     <IssueProvider>
-      <Routes />
+      <Router />
     </IssueProvider>
   );
 }
