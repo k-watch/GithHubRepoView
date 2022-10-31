@@ -51,8 +51,8 @@ export default IssueHeader;
 const Wrap = styled.div`
   padding: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #d8d8d8;
-  background-color: #f5f5f5;
+  border-bottom: 1px solid ${({ theme }) => theme.deepGray};
+  background-color: ${({ theme }) => theme.lightGray};
 `;
 
 const TitleWrap = styled.div`
@@ -89,7 +89,7 @@ const NavWrap = styled.nav`
 
     .issueCount {
       padding: 2px 5px;
-      background-color: #d8d8d8;
+      background-color: ${({ theme }) => theme.deepGray};
       border-radius: 40px;
     }
   }

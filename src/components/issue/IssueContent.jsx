@@ -107,7 +107,7 @@ const TitleWrap = styled.h1`
 
   .issueNumber {
     font-weight: lighter;
-    color: #696969;
+    color: ${({ theme }) => theme.gray};
   }
 `;
 
@@ -119,7 +119,7 @@ const SubTitleWrap = styled.div`
   span {
     margin-right: 5px;
     font-size: 14px;
-    color: #696969;
+    color: ${({ theme }) => theme.gray};
   }
 
   .openCircle {
@@ -127,7 +127,7 @@ const SubTitleWrap = styled.div`
     align-items: center;
     padding: 8px;
     border-radius: 40px;
-    background-color: #058800b8;
+    background-color: ${({ theme }) => theme.green};
     font-weight: bold;
     color: white;
     line-height: 0.1;
@@ -144,11 +144,11 @@ const SubTitleWrap = styled.div`
 
 const Line = styled.div`
   margin: 25px 0;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid ${({ theme }) => theme.deepGray};
 `;
 
 const BodyWrap = styled.div`
-  border: 1px solid #bdbdbd;
+  border: 1px solid ${({ theme }) => theme.deepGray};
   border-radius: 8px;
 
   .title {
@@ -157,8 +157,8 @@ const BodyWrap = styled.div`
     padding: 8px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    border-bottom: 1px solid #bdbdbd;
-    background-color: #f5f5f5;
+    border-bottom: 1px solid ${({ theme }) => theme.deepGray};
+    background-color: ${({ theme }) => theme.lightGray};
 
     img {
       height: 35px;
@@ -168,7 +168,7 @@ const BodyWrap = styled.div`
     span {
       margin-right: 5px;
       font-size: 15px;
-      color: #696969;
+      color: ${({ theme }) => theme.gray};
     }
     .userName {
       font-weight: bold;

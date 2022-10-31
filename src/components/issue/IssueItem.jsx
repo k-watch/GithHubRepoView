@@ -38,7 +38,7 @@ const TitleWrap = styled.div`
   .circleDot {
     margin-right: 5px;
     font-size: 17px;
-    color: #024400bc;
+    color: ${({ theme }) => theme.green};
   }
 
   h4 {
@@ -67,9 +67,10 @@ const TitleWrap = styled.div`
 
 const InfoWrap = styled.div`
   margin-top: 10px;
+
   span {
     margin-right: 5px;
     font-size: 12px;
-    color: #696969;
+    color: ${({ theme }) => theme.gray};
   }
 `;

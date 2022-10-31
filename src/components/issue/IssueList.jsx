@@ -78,7 +78,7 @@ const Wrap = styled.div`
     width: 1200px;
     height: 700px;
     overflow: auto;
-    border: 1px solid #bdbdbd;
+    border: 1px solid ${({ theme }) => theme.deepGray};
     border-radius: 8px;
 
     ::-webkit-scrollbar {
@@ -86,12 +86,12 @@ const Wrap = styled.div`
     }
 
     li {
-      border-bottom: 1px solid #bdbdbd;
+      border-bottom: 1px solid ${({ theme }) => theme.deepGray};
 
       cursor: pointer;
 
       :hover {
-        background-color: #d0d7de2b;
+        background-color: ${({ theme }) => theme.lightGray};
       }
     }
   }
