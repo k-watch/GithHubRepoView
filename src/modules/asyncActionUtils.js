@@ -5,7 +5,7 @@ const getAsyncActionType = (actionName) => {
     INIT: actionName + asyncTypeAction[0],
     REQUEST: actionName + asyncTypeAction[1],
     SUCCESS: actionName + asyncTypeAction[2],
-    FAILURE: actionName + asyncTypeAction[3],
+    ERROR: actionName + asyncTypeAction[3],
   };
 };
 
