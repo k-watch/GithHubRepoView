@@ -1,32 +1,36 @@
-export const initDispatcher = (type) => {
-  const actionHandler = (dispatch) => {
-    dispatch({ type });
+const getAsyncActionType = (actionName) => {
+  const asyncTypeAction = ['_INIT', '_REQUEST', '_SUCCESS', '_ERROR'];
 
-    dispatch({
-      type,
-      data: null,
-    });
+  return {
+    INIT: actionName + asyncTypeAction[0],
+    REQUEST: actionName + asyncTypeAction[1],
+    SUCCESS: actionName + asyncTypeAction[2],
+    FAILURE: actionName + asyncTypeAction[3],
   };
-
-  return actionHandler;
 };
 
 const createAsyncDispatcher = (type, callback) => {
-  const SUCCESS = `${type}_SUCCESS`;
-  const ERROR = `${type}_ERROR`;
+  const ACTION_TYPE = getAsyncActionType(type);
 
-  const actionHandler = async (dispatch, ...rest) => {
-    dispatch({ type });
+  const actionHandler = async (dispatch, init, ...rest) => {
+    // init 이 true 일 경우 state 값 초기화라서
+    // 다른 action 은 호출하지 않는다.
+    if (init) {
+      dispatch({ type: ACTION_TYPE.INIT });
+      return;
+    }
+
+    dispatch({ type: ACTION_TYPE.REQUEST });
 
     try {
       const data = await callback(...rest);
       dispatch({
-        type: SUCCESS,
+        type: ACTION_TYPE.SUCCESS,
         data,
       });
     } catch (error) {
       dispatch({
-        type: ERROR,
+        type: ACTION_TYPE.ERROR,
         error,
       });
     }
@@ -59,33 +63,27 @@ const error = (error) => ({
   error,
 });
 
-export const initAsyncHandler = (type, key) => {
-  function handler(state, action) {
-    return {
-      ...state,
-      [key]: initAsyncState,
-    };
-  }
-  return handler;
-};
-
 export const createAsyncHandler = (type, key) => {
-  const SUCCESS = `${type}_SUCCESS`;
-  const ERROR = `${type}_ERROR`;
+  const ACTION_TYPE = getAsyncActionType(type);
 
   function handler(state, action) {
     switch (action.type) {
-      case type:
+      case ACTION_TYPE.INIT:
+        return {
+          ...state,
+          [key]: initAsyncState,
+        };
+      case ACTION_TYPE.REQUEST:
         return {
           ...state,
           [key]: loadingState,
         };
-      case SUCCESS:
+      case ACTION_TYPE.SUCCESS:
         return {
           ...state,
           [key]: success(action.data),
         };
-      case ERROR:
+      case ACTION_TYPE.ERROR:
         return {
           ...state,
           [key]: error(action.error),

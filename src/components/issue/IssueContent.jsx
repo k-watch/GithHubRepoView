@@ -21,7 +21,7 @@ const IssueContent = () => {
 
   useEffect(() => {
     if (issueNumber) {
-      getIssue(dispatch, issueNumber);
+      getIssue(dispatch, false, issueNumber);
     }
   }, [issueNumber]);
 

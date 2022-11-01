@@ -7,7 +7,7 @@ import {
 } from 'modules/context/IssueContext';
 import useInfiniteScroll from 'modules/hooks/useInfiniteScroll';
 import styled from 'styled-components';
-import { absoluteCenter, flexBox } from 'styles/mixin';
+import { flexBox } from 'styles/mixin';
 import Loading from 'components/common/Loading';
 import BannerItem from '../common/BannerItem';
 import IssueItem from './IssueItem';
@@ -24,7 +24,7 @@ const IssueList = () => {
   const { data: issueList, loading, error } = state.issueList;
 
   const [target, setObserverStop] = useInfiniteScroll(() =>
-    getIssueList(dispatch, {
+    getIssueList(dispatch, false, {
       sort: 'comments',
       per_page: PER_PAGE,
       page: page.current,
@@ -33,7 +33,7 @@ const IssueList = () => {
 
   useEffect(() => {
     return () => {
-      initIssueList(dispatch);
+      getIssueList(dispatch, true);
     };
   }, []);
 

@@ -1,9 +1,7 @@
 import { useReducer, createContext, useContext } from 'react';
 import createAsyncDispatcher, {
   createAsyncHandler,
-  initAsyncHandler,
   initAsyncState,
-  initDispatcher,
 } from 'modules/asyncActionUtils';
 import * as api from 'api/issue/issue';
 
@@ -14,31 +12,22 @@ const initState = {
 };
 
 const issueMainHandler = createAsyncHandler('GET_ISSUE_MAIN', 'issueMain');
-const issueListInitHandler = initAsyncHandler(
-  'GET_ISSUE_LIST_INIT',
-  'issueList'
-);
 const issueListHandler = createAsyncHandler('GET_ISSUE_LIST', 'issueList');
 const issueHandler = createAsyncHandler('GET_ISSUE', 'issue');
 
 const issueReducer = (state, action) => {
-  switch (action.type) {
+  const actionType = action.type;
+  const commonActionType = actionType.substring(0, actionType.lastIndexOf('_'));
+
+  switch (commonActionType) {
     case 'GET_ISSUE_MAIN':
-    case 'GET_ISSUE_MAIN_SUCCESS':
-    case 'GET_ISSUE_MAIN_ERROR':
       return issueMainHandler(state, action);
-    case 'GET_ISSUE_LIST_INIT':
-      return issueListInitHandler(state, action);
     case 'GET_ISSUE_LIST':
-    case 'GET_ISSUE_LIST_SUCCESS':
-    case 'GET_ISSUE_LIST_ERROR':
       return issueListHandler(state, action);
     case 'GET_ISSUE':
-    case 'GET_ISSUE_SUCCESS':
-    case 'GET_ISSUE_ERROR':
       return issueHandler(state, action);
     default:
-      throw new Error(`Unhanded action type: ${action.type}`);
+      throw new Error(`Unhanded action type: ${actionType}`);
   }
 };
 
@@ -78,7 +67,6 @@ export const getIssueMain = createAsyncDispatcher(
   'GET_ISSUE_MAIN',
   api.getIssueMain
 );
-export const initIssueList = initDispatcher('GET_ISSUE_LIST_INIT');
 export const getIssueList = createAsyncDispatcher(
   'GET_ISSUE_LIST',
   api.getIssueList
