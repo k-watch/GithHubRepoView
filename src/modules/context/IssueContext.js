@@ -4,7 +4,7 @@ import createAsyncDispatcher, {
   initAsyncHandler,
   initAsyncState,
   initDispatcher,
-} from 'lib/asyncActionUtils';
+} from 'modules/asyncActionUtils';
 import * as api from 'api/issue/issue';
 
 const initState = {
