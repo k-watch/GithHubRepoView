@@ -1,7 +1,8 @@
 import { useReducer, createContext, useContext } from 'react';
 import createAsyncDispatcher, {
-  createAsyncHandler,
   initAsyncState,
+  createAsyncHandler,
+  initStateDispatcher,
 } from 'modules/asyncActionUtils';
 import * as api from 'api/issue/issue';
 
@@ -67,6 +68,7 @@ export const getIssueMain = createAsyncDispatcher(
   'GET_ISSUE_MAIN',
   api.getIssueMain
 );
+export const initIssueList = initStateDispatcher('GET_ISSUE_LIST');
 export const getIssueList = createAsyncDispatcher(
   'GET_ISSUE_LIST',
   api.getIssueList

@@ -18,7 +18,7 @@ const IssueHeader = () => {
   const { data: issue, loading, error } = state.issueMain;
 
   useEffect(() => {
-    getIssueMain(dispatch, false);
+    getIssueMain(dispatch);
   }, []);
 
   const onClickMain = () => {

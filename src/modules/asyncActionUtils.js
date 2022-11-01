@@ -9,17 +9,18 @@ const getAsyncActionType = (actionName) => {
   };
 };
 
+export const initStateDispatcher = (type) => {
+  const handler = (dispatch) => {
+    dispatch({ type: `${type}_INIT` });
+  };
+
+  return handler;
+};
+
 const createAsyncDispatcher = (type, callback) => {
   const ACTION_TYPE = getAsyncActionType(type);
 
-  const actionHandler = async (dispatch, init, ...rest) => {
-    // init 이 true 일 경우 state 값 초기화라서
-    // 다른 action 은 호출하지 않는다.
-    if (init) {
-      dispatch({ type: ACTION_TYPE.INIT });
-      return;
-    }
-
+  const actionHandler = async (dispatch, ...rest) => {
     dispatch({ type: ACTION_TYPE.REQUEST });
 
     try {
@@ -66,7 +67,7 @@ const error = (error) => ({
 export const createAsyncHandler = (type, key) => {
   const ACTION_TYPE = getAsyncActionType(type);
 
-  function handler(state, action) {
+  const handler = (state, action) => {
     switch (action.type) {
       case ACTION_TYPE.INIT:
         return {
@@ -91,7 +92,7 @@ export const createAsyncHandler = (type, key) => {
       default:
         return state;
     }
-  }
+  };
   return handler;
 };
 

@@ -24,7 +24,7 @@ const IssueList = () => {
   const { data: issueList, loading, error } = state.issueList;
 
   const [target, setObserverStop] = useInfiniteScroll(() =>
-    getIssueList(dispatch, false, {
+    getIssueList(dispatch, {
       sort: 'comments',
       per_page: PER_PAGE,
       page: page.current,
@@ -33,7 +33,7 @@ const IssueList = () => {
 
   useEffect(() => {
     return () => {
-      getIssueList(dispatch, true);
+      initIssueList(dispatch);
     };
   }, []);
 
