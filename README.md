@@ -2,7 +2,7 @@
 
 > 특정 깃헙 레파지토리([angular-cli](https://github.com/angular/angular-cli))의 이슈 목록과 상세 내용을 확인
 >
-> ### 🌍 [배포링크](https://k-watch.netlify.app/)
+> ### 🌍 [배포링크](https://watch-githubrepoview.netlify.app/)
 
 <br/>
 
