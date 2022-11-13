@@ -2,6 +2,7 @@ const URL = {
   ISSUE: {
     LIST_LINK: '/',
     CONTENT_LINK: '/:issueNumber',
+    ERROR_LINK: '/error',
   },
   WANTED: {
     LINK: 'https://www.wanted.co.kr/',

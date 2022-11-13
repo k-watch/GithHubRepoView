@@ -6,13 +6,15 @@ import {
   initIssueList,
 } from 'modules/context/IssueContext';
 import useInfiniteScroll from 'modules/hooks/useInfiniteScroll';
+import Error from 'components/common/Error';
+import Loading from 'components/common/Loading';
 import styled from 'styled-components';
 import { flexBox } from 'styles/mixin';
-import Loading from 'components/common/Loading';
 import BannerItem from '../common/BannerItem';
 import IssueItem from './IssueItem';
 
 const PER_PAGE = 25;
+const AD_BANNER_INDEX = 4;
 
 const IssueList = () => {
   const [list, setList] = useState([]);
@@ -23,7 +25,7 @@ const IssueList = () => {
 
   const { data: issueList, loading, error } = state.issueList;
 
-  const [target, setObserverStop] = useInfiniteScroll(() =>
+  const [observationTarget, setObserverStop] = useInfiniteScroll(() =>
     getIssueList(dispatch, {
       sort: 'comments',
       per_page: PER_PAGE,
@@ -52,12 +54,13 @@ const IssueList = () => {
 
   return (
     <S.Wrap>
+      {error && <Error error={error} />}
       <ul>
         {list &&
           list.map((issue, index) => {
-            if (index === 4) {
+            if (index === AD_BANNER_INDEX) {
               return (
-                <li key={indexedDB}>
+                <li role="presentation" key={indexedDB}>
                   <BannerItem />
                 </li>
               );
@@ -68,7 +71,7 @@ const IssueList = () => {
               </li>
             );
           })}
-        <div ref={target} />
+        <div ref={observationTarget} />
         {loading && <Loading />}
       </ul>
     </S.Wrap>

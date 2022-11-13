@@ -3,6 +3,7 @@ import IssueHeader from 'components/issue/IssueHeader';
 import IssueListPage from 'pages/IssueListPage';
 import IssueContentPage from 'pages/IssueContentPage';
 import URL from 'api/common/url';
+import Error from 'components/common/Error';
 
 const Router = () => {
   return (
@@ -12,6 +13,7 @@ const Router = () => {
           <Route path={URL.ISSUE.LIST_LINK} element={<IssueListPage />} />
           <Route path={URL.ISSUE.CONTENT_LINK} element={<IssueContentPage />} />
         </Route>
+        <Route path={URL.ISSUE.ERROR_LINK} element={<Error />} />
       </Routes>
     </BrowserRouter>
   );

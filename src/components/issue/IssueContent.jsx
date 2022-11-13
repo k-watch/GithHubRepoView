@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   useIssueState,
   useIssueDispatch,
@@ -9,6 +9,7 @@ import { TbCircleDot } from 'react-icons/tb';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import 'github-markdown-css';
+import Error from 'components/common/Error';
 import styled from 'styled-components';
 
 const IssueContent = () => {
@@ -17,7 +18,7 @@ const IssueContent = () => {
   const state = useIssueState();
   const dispatch = useIssueDispatch();
 
-  const { data: issue, loading, error } = state.issue;
+  const { data: issue, error } = state.issue;
 
   useEffect(() => {
     if (issueNumber) {
@@ -27,6 +28,7 @@ const IssueContent = () => {
 
   return (
     <S.Wrap>
+      {error && <Error error={error} />}
       {issue && (
         <div>
           <S.TitleWrap>
